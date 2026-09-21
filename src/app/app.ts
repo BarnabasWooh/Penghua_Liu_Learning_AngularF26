@@ -8,5 +8,6 @@ import { RouterOutlet } from '@angular/router';
   templateUrl: './app.html',
 })
 export class App {
-  protected readonly title = "Penghua";
+  protected readonly title=  'Penghua';
+  protected readonly  weather = 'Sunny'
 }

@@ -1,2 +1,14 @@
-<h1>Hi {{ title}}</h1>
-<h2>Today is {{ weather}}</h2>
+<h1>Mini Library</h1>
+
+@for (book of books; track book.id){
+  <div>
+    <h2>{{book.name}}</h2>
+    <p>Author: {{book.author}}</p>
+    <p>Category: {{book.category}}</p>
+    @if (book.description){
+      <p>Description: {{book.description}}</p>
+    }
+  </div>
+} @empty {
+  <p>Currently no book</p>
+}

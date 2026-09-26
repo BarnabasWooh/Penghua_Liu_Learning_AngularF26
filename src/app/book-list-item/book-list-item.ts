@@ -1,6 +1,9 @@
-import {Component, input} from '@angular/core';
+import {Component, input, output} from '@angular/core';
 import {Book} from '../shared/model/book';
-
+export interface BookEvent {
+  id: number | string;
+  action: 'opened' | 'favourited';
+}
 @Component({
   imports: [],
   selector: 'app-book-list-item',
@@ -9,4 +12,11 @@ import {Book} from '../shared/model/book';
 })
 export class BookListItem {
   item = input.required<Book>();
+  actionEmitter = output<BookEvent>();
+  onCardClick() {
+    this.actionEmitter.emit({
+      id: this.item().id,
+      action: 'opened'
+    });
+  }
 }

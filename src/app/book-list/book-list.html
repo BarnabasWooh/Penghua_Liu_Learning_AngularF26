@@ -1,0 +1,5 @@
+@for (book of bookList; track book.id) {
+  <app-book-list-item [item]="book" />
+} @empty {
+  <p>There's no book now!</p>
+}

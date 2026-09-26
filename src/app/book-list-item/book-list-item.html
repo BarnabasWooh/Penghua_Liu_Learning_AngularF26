@@ -1,4 +1,4 @@
-<div class="card">
+<div class="card" (click)="onCardClick()">
   <h2>{{ item().name }}</h2>
   @switch (item().category) {
     @case ('Fiction') { <span>novel</span> }

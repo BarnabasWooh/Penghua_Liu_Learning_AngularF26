@@ -1,0 +1,13 @@
+<div class="card">
+  <h2>{{ item().name }}</h2>
+  @switch (item().category) {
+    @case ('Fiction') { <span>novel</span> }
+    @case ('Fantasy') { <span>family</span> }
+    @default { <span>others</span> }
+  }
+  @if (item().description) {
+    <p>Description：{{ item().description }}</p>
+  } @else {
+    <p>The author is lazy and left no description. </p>
+  }
+</div>

@@ -1,9 +1,7 @@
 import {Component, input, output} from '@angular/core';
 import {Book} from '../shared/model/book';
-export interface BookEvent {
-  id: number | string;
-  action: 'opened' | 'favourited';
-}
+import { BookEvent} from '../shared/model/book';
+
 @Component({
   imports: [],
   selector: 'app-book-list-item',
@@ -17,7 +15,7 @@ export class BookListItem {
   onCardClick() {
     this.actionEmitter.emit({
       id: this.item().id,
-      action: 'opened'
+      action: 'clicked'
     });
   }
 }

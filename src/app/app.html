@@ -1,18 +1,1 @@
-<h1 style="text-align: center;">Mini Library</h1>
-
-<div class = "container">
-
-@for (book of books; track book.id){
-  <div class = "book-card">
-    <h2>{{book.name}}</h2>
-    <p>Author: {{book.author}}</p>
-    <p>Category: {{book.category}}</p>
-    @if (book.description){
-      <p>Description: {{book.description}}</p>
-    }
-  </div>
-} @empty {
-  <p>Currently no book</p>
-}
-
-</div>
+<app-book-list />

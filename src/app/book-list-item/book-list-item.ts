@@ -12,6 +12,7 @@ export interface BookEvent {
 })
 export class BookListItem {
   item = input.required<Book>();
+  isEven = input<boolean>(false);
   actionEmitter = output<BookEvent>();
   onCardClick() {
     this.actionEmitter.emit({

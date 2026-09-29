@@ -1,4 +1,5 @@
-<div class="card" (click)="onCardClick()">
+<div class="card" (click)="onCardClick()" [class.zebra]="isEven()">
+  <img [src]="item().imageUrl" alt="bookCover" width="100">
   <h2>{{ item().name }}</h2>
   @switch (item().category) {
     @case ('Fiction') { <span>novel</span> }

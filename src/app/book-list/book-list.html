@@ -1,5 +1,12 @@
-@for (book of bookList; track book.id) {
-  <app-book-list-item [item]="book" />
+<div class="container">
+
+@for (book of bookList; track book.id; let evenRow = $even) {
+  <app-book-list-item
+    [item]="book"
+    (actionEmitter)="onChildAction($event)"
+    [isEven]="evenRow" />
 } @empty {
-  <p>There's no book now!</p>
+  <p>No books now.</p>
 }
+
+</div>

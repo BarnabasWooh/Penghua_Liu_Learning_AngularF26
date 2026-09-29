@@ -3,3 +3,6 @@
   padding: 10px;
   margin-bottom: 10px;
 }
+:host(.zebra) .card {
+  background-color: lightblue !important;
+}

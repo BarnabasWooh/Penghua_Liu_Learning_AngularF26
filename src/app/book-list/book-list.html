@@ -1,6 +1,6 @@
 <div class="container">
 
-@for (book of bookList; track book.id; let evenRow = $even) {
+@for (book of bookList(); track book.id; let evenRow = $even) {
   <app-book-list-item
     [item]="book"
     (actionEmitter)="onChildAction($event)"

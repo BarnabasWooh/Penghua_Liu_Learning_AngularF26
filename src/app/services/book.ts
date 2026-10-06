@@ -63,6 +63,10 @@ this.books().filter(book => book.description));
     this.booksWithDescription().length
   );
 
+  fantasyBookCount = computed(() =>
+    this.books().filter(book => book.category === 'Fantasy').length
+  );
+
 constructor() {
   effect(() => {
     console.log('Book count is now', this.books().length)

@@ -19,6 +19,8 @@ export class BookList {
 
   booksWithDescriptionCount = this.bookService.booksWithDescriptionCount;
 
+  fantasyBookCount = this.bookService.fantasyBookCount;
+
   onChildAction(event: BookEvent) {
     this.bookService.removeBook(event.id);
 }

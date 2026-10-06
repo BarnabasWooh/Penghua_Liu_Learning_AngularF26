@@ -2,8 +2,8 @@
   <img [src]="item().imageUrl" alt="bookCover" width="100">
   <h2>{{ item().name }}</h2>
   @switch (item().category) {
-    @case ('Fiction') { <span>novel</span> }
-    @case ('Fantasy') { <span>family</span> }
+    @case ('Fiction') { <span>Fiction</span> }
+    @case ('Fantasy') { <span>Fantasy</span> }
     @default { <span>others</span> }
   }
   @if (item().description) {

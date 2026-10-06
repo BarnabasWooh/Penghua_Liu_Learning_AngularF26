@@ -59,6 +59,10 @@ bookList = this.books.asReadonly();
 booksWithDescription = computed(() =>
 this.books().filter(book => book.description));
 
+  booksWithDescriptionCount = computed(() =>
+    this.booksWithDescription().length
+  );
+
 constructor() {
   effect(() => {
     console.log('Book count is now', this.books().length)
@@ -67,5 +71,9 @@ constructor() {
 
 addBook(newBook: Book) {
 this.books.update(list => [...list, newBook]);
+}
+
+removeBook(id: string | number){
+  this.books.update(list => list.filter(book => book.id !== id));
 }
 }

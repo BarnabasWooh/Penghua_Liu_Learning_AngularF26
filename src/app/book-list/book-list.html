@@ -9,4 +9,10 @@
   <p>No books now.</p>
 }
 
+  <h3>Books with Description</h3>
+
+  @for (book of booksWithDescription(); track book.id){
+    <p>{{book.name}}</p>
+  }
+
 </div>

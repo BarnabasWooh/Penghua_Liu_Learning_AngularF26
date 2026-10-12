@@ -1,4 +1,4 @@
-import { Service, signal, computed, effect } from '@angular/core';
+import { Service, signal, computed} from '@angular/core';
 import {Book} from '../shared/model/book';
 
 @Service()
@@ -66,12 +66,6 @@ this.books().filter(book => book.description));
   fantasyBookCount = computed(() =>
     this.books().filter(book => book.category === 'Fantasy').length
   );
-
-constructor() {
-  effect(() => {
-    console.log('Book count is now', this.books().length)
-  });
-}
 
 addBook(newBook: Book) {
 this.books.update(list => [...list, newBook]);

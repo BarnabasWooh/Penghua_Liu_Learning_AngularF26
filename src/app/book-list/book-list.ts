@@ -1,4 +1,4 @@
-import {Component, computed, inject} from '@angular/core';
+import {Component, inject} from '@angular/core';
 import {BookListItem} from '../book-list-item/book-list-item';
 import { BookEvent} from '../shared/model/book';
 import {BookService} from '../services/book';

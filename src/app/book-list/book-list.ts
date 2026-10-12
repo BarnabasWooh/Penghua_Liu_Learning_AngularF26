@@ -21,6 +21,8 @@ export class BookList {
 
   fantasyBookCount = this.bookService.fantasyBookCount;
 
+  apiBaseUrl = this.bookService.apiBaseUrl;
+
   onChildAction(event: BookEvent) {
     this.bookService.removeBook(event.id);
 }

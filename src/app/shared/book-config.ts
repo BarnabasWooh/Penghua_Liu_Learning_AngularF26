@@ -1,8 +1,9 @@
 import { InjectionToken } from '@angular/core';
 
-export class BookConfig {
+export interface BookConfig {
   apiBaseUrl: string;
   defaultAuthor: string;
 }
 
 export const book_Config = new InjectionToken<BookConfig>('BookConfig');
+

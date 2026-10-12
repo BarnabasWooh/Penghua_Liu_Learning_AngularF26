@@ -1,8 +1,11 @@
-import { Service, signal, computed} from '@angular/core';
-import {Book} from '../shared/model/book';
+import { Service, signal, computed, inject } from '@angular/core';
+import {Book} from '../shared/model/book'
+import {book_Config} from '../shared/book-config';
 
 @Service()
 export class BookService {
+  private config = inject(book_Config);
+  apiBaseUrl =this.config.apiBaseUrl;
 
 private books = signal<Book[]>([
   {

@@ -1,0 +1,38 @@
+<h2>Add Book</h2>
+
+<form class="book-form" [formGroup]="bookForm" (ngSubmit)="onSubmit()">
+  <label>
+    Name
+    <input type="text" formControlName="name" />
+  </label>
+  @if (bookForm.controls.name.touched) {
+    @if (bookForm.controls.name.hasError('required')) {
+      <p class="error">Name is required.</p>
+    }
+    @if (bookForm.controls.name.hasError('minlength')) {
+      <p class="error">Name must be at least 2 characters.</p>
+    }
+  }
+
+  <label>
+    Author
+    <input type="text" formControlName="author" />
+  </label>
+  @if (bookForm.controls.author.touched && bookForm.controls.author.hasError('required')) {
+    <p class="error">Author is required.</p>
+  }
+
+  <label>
+    category
+    <input type="text" formControlName="category" />
+  </label>
+
+  <label>
+    Description
+    <input type="text" formControlName="description" />
+  </label>
+
+  <button type="submit" [disabled]="bookForm.invalid">
+    Add Book
+  </button>
+</form>

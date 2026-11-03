@@ -74,7 +74,16 @@ addBook(newBook: Book) {
 this.books.update(list => [...list, newBook]);
 }
 
+  nextId(): number {
+    const ids = this.books()
+      .map(b => b.id)
+      .filter((id): id is number => typeof id === 'number');
+
+    return Math.max(0, ...ids) + 1;
+  }
+
 removeBook(id: string | number){
   this.books.update(list => list.filter(book => book.id !== id));
 }
+
 }

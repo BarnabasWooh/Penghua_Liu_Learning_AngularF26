@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 import {BookDetail} from './components/book-detail/book-detail';
 import {BookList} from './book-list/book-list';
+import {BookForm} from './book-form/book-form';
 
 export const routes: Routes = [
 
@@ -9,4 +10,6 @@ export const routes: Routes = [
   // so with the default prefix matching this redirect would match every URL.
   { path: '', redirectTo: 'books', pathMatch: 'full'},
   { path: 'books', component: BookList },
+
+  { path: 'add', component: BookForm}
 ];

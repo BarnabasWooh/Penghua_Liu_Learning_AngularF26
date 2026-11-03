@@ -1,7 +1,29 @@
 import { Component, inject, input, effect, computed} from '@angular/core';
-import { FormBuilder, ReactiveFormsModule, Validators } from "@angular/forms";
+import { FormBuilder, ReactiveFormsModule, Validators, AbstractControl, ValidationErrors } from "@angular/forms";
 import {BookService} from '../services/book';
 import { Router } from "@angular/router";
+
+// Validator for whitespace
+function noWhitespace(control: AbstractControl): ValidationErrors | null {
+  const value = control.value as string;
+
+  if (value.trim() === '') {
+    return { whitespace: true };
+  }
+
+  return null;
+}
+
+function nameAuthorValidator(control: AbstractControl): ValidationErrors | null {
+  const name = control.get('name')?.value as string;
+  const author = control.get('author')?.value as string;
+
+  if (name && author && name.trim().toLowerCase() === author.trim().toLowerCase()) {
+    return { sameNameAuthor: true };
+  }
+
+  return null;
+}
 
 @Component({
   imports: [ReactiveFormsModule],
@@ -50,11 +72,11 @@ export class BookForm {
   }
 
   protected bookForm = this.fb.nonNullable.group({
-    name: ['', [Validators.required, Validators.minLength(2)]],
+    name: ['', [ Validators.required, Validators.minLength(2), noWhitespace]],
     author: ['', Validators.required],
     category: [''],
-    description: [''],
-  })
+    description: ['']},
+    { validators: nameAuthorValidator });
 
   constructor() {
     effect(() => {

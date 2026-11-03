@@ -12,6 +12,9 @@
     @if (bookForm.controls.name.hasError('minlength')) {
       <p class="error">Name must be at least 2 characters.</p>
     }
+    @if (bookForm.controls.name.hasError('whitespace')) {
+      <p class="error">Name cannot contain only spaces.</p>
+    }
   }
 
   <label>
@@ -31,6 +34,12 @@
     Description
     <input type="text" formControlName="description" />
   </label>
+
+  @if (bookForm.controls.name.touched &&
+  bookForm.controls.author.touched &&
+  bookForm.hasError('sameNameAuthor')) {
+    <p class="error">Book name and author cannot be the same.</p>
+  }
 
   <button type="submit" [disabled]="bookForm.invalid">
     {{ isEditMode() ? 'Save Changes' : 'Add Book' }}

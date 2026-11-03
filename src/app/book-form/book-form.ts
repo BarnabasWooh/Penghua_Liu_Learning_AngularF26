@@ -35,6 +35,20 @@ export class BookForm {
   private fb = inject(FormBuilder);
   private bookService = inject  (BookService);
   private router = inject (Router);
+
+  // Add optional tag to add and remove rows.
+  protected tags = this.fb.array([
+    this.fb.nonNullable.control('')
+  ]);
+  // Add an input tag
+  protected addTag(): void {
+    this.tags.push(this.fb.nonNullable.control(''));
+  }
+// Add a  tag to remove
+  protected removeTag(index: number): void {
+    this.tags.removeAt(index);
+  }
+
   id = input<string>();
   protected isEditMode = computed(() => this.id() !== undefined);
 
@@ -70,13 +84,17 @@ export class BookForm {
       this.router.navigate(['/books', id]);
     }
   }
-
   protected bookForm = this.fb.nonNullable.group({
-    name: ['', [ Validators.required, Validators.minLength(2), noWhitespace]],
+    name: ['', [
+      Validators.required,
+      Validators.minLength(2),
+      noWhitespace
+    ]],
     author: ['', Validators.required],
     category: [''],
-    description: ['']},
-    { validators: nameAuthorValidator });
+    description: [''],
+    tags: this.tags
+  }, { validators: nameAuthorValidator });
 
   constructor() {
     effect(() => {
@@ -89,6 +107,12 @@ export class BookForm {
       const book = this.bookService.getBook(id);
 
       if (book) {
+        this.tags.clear();
+
+        for (const tag of book.tags ?? []) {
+          this.tags.push(this.fb.nonNullable.control(tag));
+        }
+
         this.bookForm.patchValue(book);
       }
     });

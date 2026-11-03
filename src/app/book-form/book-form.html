@@ -41,6 +41,24 @@
     <p class="error">Book name and author cannot be the same.</p>
   }
 
+  <div formArrayName="tags">
+    <h3>Book Tags</h3>
+
+    @for (tag of tags.controls; track tag; let i = $index) {
+      <div>
+        <input type="text" [formControlName]="i" placeholder="Enter a tag" />
+
+        <button type="button" (click)="removeTag(i)">
+          Remove
+        </button>
+      </div>
+    }
+
+    <button type="button" (click)="addTag()">
+      Add Tag
+    </button>
+  </div>
+
   <button type="submit" [disabled]="bookForm.invalid">
     {{ isEditMode() ? 'Save Changes' : 'Add Book' }}
   </button>

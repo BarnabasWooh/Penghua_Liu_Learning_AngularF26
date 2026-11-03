@@ -1,6 +1,7 @@
-import { Component, signal } from '@angular/core';
+import { Component, signal, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { Book } from './shared/model/book';
+import { EditGuard } from './services/edit-guard';
 
 @Component({
   imports: [RouterOutlet],
@@ -55,6 +56,7 @@ export class App {
       description: "An epic high-fantasy novel that follows the quest to destroy the One Ring."
     }
   ]
+  protected guardService = inject(EditGuard);
 }
 
 

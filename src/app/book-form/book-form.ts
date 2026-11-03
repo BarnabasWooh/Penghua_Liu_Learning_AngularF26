@@ -1,4 +1,4 @@
-import { Component, inject} from '@angular/core';
+import { Component, inject, input, effect, computed} from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from "@angular/forms";
 import {BookService} from '../services/book';
 import { Router } from "@angular/router";
@@ -13,6 +13,8 @@ export class BookForm {
   private fb = inject(FormBuilder);
   private bookService = inject  (BookService);
   private router = inject (Router);
+  id = input<string>();
+  protected isEditMode = computed(() => this.id() !== undefined);
 
   protected onSubmit(): void {
     if (this.bookForm.invalid) {
@@ -20,12 +22,31 @@ export class BookForm {
     }
 
     const formValue = this.bookForm.getRawValue();
-    const id = this.bookService.nextId();
+    const currentId = this.id();
 
-    this.bookService.addBook({ id, ...formValue });
+    if (currentId !== undefined) {
+      console.log('Edit ID:', currentId);
+      console.log('Book found:', this.bookService.getBook(currentId));
+      const existingBook = this.bookService.getBook(currentId);
 
-    this.bookForm.reset();
-    this.router.navigate(['/books', id]);
+      if (!existingBook) {
+        return;
+      }
+
+      this.bookService.updateBook({
+        ...existingBook,
+        ...formValue
+      });
+
+      this.router.navigate(['/books', currentId]);
+    } else {
+      const id = this.bookService.nextId();
+
+      this.bookService.addBook({ id, ...formValue });
+
+      this.bookForm.reset();
+      this.router.navigate(['/books', id]);
+    }
   }
 
   protected bookForm = this.fb.nonNullable.group({
@@ -34,4 +55,20 @@ export class BookForm {
     category: [''],
     description: [''],
   })
+
+  constructor() {
+    effect(() => {
+      const id = this.id();
+
+      if (id === undefined) {
+        return;
+      }
+
+      const book = this.bookService.getBook(id);
+
+      if (book) {
+        this.bookForm.patchValue(book);
+      }
+    });
+  }
 }

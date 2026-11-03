@@ -85,5 +85,14 @@ this.books.update(list => [...list, newBook]);
 removeBook(id: string | number){
   this.books.update(list => list.filter(book => book.id !== id));
 }
-
+  updateBook(updatedBook: Book) {
+    this.books.update(list =>
+      list.map(book =>
+        book.id === updatedBook.id ? updatedBook : book
+      )
+    );
+  }
+  getBook(id: string): Book | undefined {
+    return this.books().find(book => String(book.id) === id);
+  }
 }

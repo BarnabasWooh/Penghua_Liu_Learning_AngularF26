@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, inject, input, computed } from '@angular/core';
+import {BookService} from '../../services/book';
 
 @Component({
   imports: [],
@@ -6,4 +7,14 @@ import { Component } from '@angular/core';
   styleUrl: './book-detail.scss',
   templateUrl: './book-detail.html',
 })
-export class BookDetail {}
+export class BookDetail {
+  private bookService = inject(BookService);
+
+  id = input<string>();
+
+  book = computed(() =>
+    this.bookService.bookList().find(
+      b => String(b.id) === this.id()
+    )
+  );
+}

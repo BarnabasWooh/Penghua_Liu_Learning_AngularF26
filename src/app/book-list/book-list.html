@@ -5,6 +5,8 @@
     [item]="book"
     (actionEmitter)="onChildAction($event)"
     [isEven]="evenRow" />
+
+  <a [routerLink]="['/books', book.id]">View Details</a>
 } @empty {
   <p>No books now.</p>
 }

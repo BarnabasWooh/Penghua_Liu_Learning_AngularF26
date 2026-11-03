@@ -2,10 +2,12 @@ import {Component, inject} from '@angular/core';
 import {BookListItem} from '../book-list-item/book-list-item';
 import { BookEvent} from '../shared/model/book';
 import {BookService} from '../services/book';
+import { RouterLink } from '@angular/router';
 
 @Component({
   imports: [
-    BookListItem
+    BookListItem,
+    RouterLink
   ],
   selector: 'app-book-list',
   styleUrl: './book-list.css',

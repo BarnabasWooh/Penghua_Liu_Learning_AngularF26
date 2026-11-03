@@ -1,1 +1,7 @@
-<p>book-detail works!</p>
+@if (book(); as selectedBook) {
+  <h2>{{ selectedBook.name }}</h2>
+  <p>Author: {{ selectedBook.author }}</p>
+  <p>Category: {{ selectedBook.category }}</p>
+} @else {
+  <p>Book not found.</p>
+}

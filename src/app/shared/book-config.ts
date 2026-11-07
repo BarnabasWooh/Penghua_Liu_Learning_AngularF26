@@ -1,7 +1,7 @@
 import { InjectionToken } from '@angular/core';
 
 export interface BookConfig {
-  apiBaseUrl: string;
+  apiBaseUrl: 'https://openlibrary.org'
   defaultAuthor: string;
 }
 

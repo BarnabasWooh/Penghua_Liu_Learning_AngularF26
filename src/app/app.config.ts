@@ -12,12 +12,13 @@ export const appConfig: ApplicationConfig = {
     {
       provide: book_Config,
       useValue: {
-        apiBaseUrl: 'https://placeholder.example.com/ap1', defaultAuthor: 'Harper Lee'
+        // Switch placeholder api to active OpenLibrary API.
+        apiBaseUrl: 'https://openlibrary.org', defaultAuthor: ''
       }
     },
     {
       provide: BookService,
-      useClass: MockBookService
+      useClass: BookService
     }
   ]
 };

@@ -1,16 +1,81 @@
+/* Main book list layout */
 .container {
-  max-width: 720px;
-  margin: 2rem auto;
-  padding: 0 1rem;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-  text-align: center;
+  max-width: 1400px;
+  margin: 40px auto;
+  padding: 0 24px;
+
+  /* Use a soft, rounded font */
+  font-family: "Tsukushi A Round Gothic",
+  "Hiragino Maru Gothic ProN",
+  "Nunito",
+  sans-serif;
+
+  /* Display books in a grid */
   display: grid;
-  grid-template-columns: 1fr;
-  gap: 15px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 24px;
+
+  text-align: center;
 }
 
-@media (min-width: 500px){
+/* Display two columns on tablets */
+@media (max-width: 1000px) {
   .container {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
+}
+
+/* Display one column on mobile phones */
+@media (max-width: 600px) {
+  .container {
+    grid-template-columns: 1fr;
+  }
+}
+/* Style each book card */
+.book-card {
+  background-color: #ffffff;
+  border: 1px solid #e8e8e8;
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+  min-height: 480px;
+  box-sizing: border-box;
+  /* Keep the content and buttons aligned */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 16px;
+
+  /* Add a smooth hover effect */
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+/* Lift the card slightly when hovered */
+.book-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+}
+
+/* Keep the action links together */
+.book-actions {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-top: auto;
+}
+
+/* Style action links as buttons */
+.book-actions a {
+  text-decoration: none;
+  background-color: #edf2f7;
+  color: #34495e;
+  border-radius: 16px;
+  padding: 10px 14px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+/* Highlight buttons when hovered */
+.book-actions a:hover {
+  background-color: #dce8f2;
 }

@@ -34,3 +34,9 @@ export function mapOpenLibraryBook(apiBook: OpenLibraryBook): Book {
     imageUrl: apiBook.cover_i ? `https://covers.openlibrary.org/b/id/${apiBook.cover_i}-M.jpg` : ''
   };
 }
+
+// Define the response structure from the OpenLibrary API.
+export interface OpenLibraryResponse {
+  // Store the list of books returned from the API
+  docs: OpenLibraryBook[];
+}

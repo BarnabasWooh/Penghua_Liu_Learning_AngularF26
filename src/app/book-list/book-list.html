@@ -1,14 +1,25 @@
 <div class="container">
 
-@for (book of bookList(); track book.id; let evenRow = $even) {
-  <app-book-list-item
-    [item]="book"
-    (actionEmitter)="onChildAction($event)"
-    [isEven]="evenRow" />
+  <!-- Display each book inside its own card -->
+  @for (book of bookList(); track book.id; let evenRow = $even) {
 
-  <a [routerLink]="['/books', book.id]">View Details</a>
-  <a [routerLink]="['/books/edit', book.id]">Edit</a>
-} @empty {
+    <div class="book-card">
+
+      <!-- Display the book information -->
+      <app-book-list-item
+        [item]="book"
+        (actionEmitter)="onChildAction($event)"
+        [isEven]="evenRow" />
+
+      <!-- Keep both action links together -->
+      <div class="book-actions">
+        <a [routerLink]="['/books', book.id]">View Details</a>
+        <a [routerLink]="['/books/edit', book.id]">Edit</a>
+      </div>
+
+    </div>
+
+  }@empty {
   <p>No books now.</p>
 }
 

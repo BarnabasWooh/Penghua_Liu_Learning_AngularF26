@@ -67,3 +67,7 @@ https://openlibrary.org/dev/docs/api/search
 
 Example Request:
 https://openlibrary.org/search.json?q=Christian+spiritual+growth&limit=20
+
+I chose HttpClient, because my API returns book inside a docs array, I need to extract and convert them into my book model.
+
+It also uses RxJS operators like map() to process API data. I don't need to change my existed add, edit or delete methods as well.

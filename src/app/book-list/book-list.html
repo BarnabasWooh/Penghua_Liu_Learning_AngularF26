@@ -1,5 +1,5 @@
 <div class="container">
-
+  <p>Changes are saved on this device only.</p>
   <!-- Display each book inside its own card -->
   @for (book of bookList(); track book.id; let evenRow = $even) {
 
@@ -15,6 +15,7 @@
       <div class="book-actions">
         <a [routerLink]="['/books', book.id]">View Details</a>
         <a [routerLink]="['/books/edit', book.id]">Edit</a>
+        <button type="button" (click)="deleteBook(book.id)">Delete</button>
       </div>
 
     </div>

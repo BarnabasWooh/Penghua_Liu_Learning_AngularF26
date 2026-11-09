@@ -28,4 +28,8 @@ export class BookList {
   onChildAction(event: BookEvent) {
     this.bookService.removeBook(event.id);
 }
+// Delete a book from the local list
+  deleteBook(id: string | number): void{
+    this.bookService.removeBook(id);
+  }
 }

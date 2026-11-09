@@ -1,3 +1,6 @@
+@if (loadingService.isLoading()) {
+  <span>Loading...</span>
+}
 <nav>
   <button type="button" (click)="guardService.toggleGuard()">
     {{ guardService.guardEnabled() ? 'Unlock Editing' : 'Lock Editing' }}

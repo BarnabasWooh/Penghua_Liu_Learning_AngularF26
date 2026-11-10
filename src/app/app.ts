@@ -2,6 +2,7 @@ import { Component, signal, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { EditGuard } from './services/edit-guard';
 import {LoadingService} from './services/loading';
+import {ErrorService} from './services/error';
 
 @Component({
   imports: [RouterOutlet],
@@ -14,6 +15,7 @@ export class App {
   protected readonly  weather = 'Sunny';
   protected guardService = inject(EditGuard);
   protected loadingService = inject(LoadingService);
+  protected errorService   = inject(ErrorService);
 }
 
 

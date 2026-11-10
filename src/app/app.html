@@ -1,6 +1,14 @@
 @if (loadingService.isLoading()) {
   <span>Loading...</span>
 }
+@if (errorService.message()) {
+  <div class = 'error-banner'>
+    <span>{{errorService.message() }}</span>
+    <button type = "button"(click)="errorService.clear()">
+      Dismiss
+    </button>
+  </div>
+}
 <nav>
   <button type="button" (click)="guardService.toggleGuard()">
     {{ guardService.guardEnabled() ? 'Unlock Editing' : 'Lock Editing' }}

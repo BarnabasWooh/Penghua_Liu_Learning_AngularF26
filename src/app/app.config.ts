@@ -6,10 +6,11 @@ import { BookService} from './services/book';
 import { MockBookService} from './services/mock-book';
 import {provideHttpClient, withInterceptors} from '@angular/common/http';
 import {loadingInterceptor} from './interceptors/loading-interceptor';
+import {errorInterceptor} from './interceptors/error-interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideHttpClient(withInterceptors([loadingInterceptor])),
+    provideHttpClient(withInterceptors([loadingInterceptor, errorInterceptor])),
     provideBrowserGlobalErrorListeners(),
     provideRouter(routes, withComponentInputBinding()),
     {

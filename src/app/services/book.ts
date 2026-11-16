@@ -28,7 +28,7 @@ constructor() {this.load();}
 
 // Send a get request to open library.
 this.http.get<OpenLibraryResponse>(
-  `${this.apiBaseUrl}/wrong-path`,
+  `${this.apiBaseUrl}/search.json?q=Christian+spiritual+growth&limit=20`,
 {
   params: {
     q: 'Christian spiritual growth',

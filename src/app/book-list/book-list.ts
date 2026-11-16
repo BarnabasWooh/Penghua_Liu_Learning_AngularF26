@@ -3,11 +3,13 @@ import {BookListItem} from '../book-list-item/book-list-item';
 import { BookEvent} from '../shared/model/book';
 import {BookService} from '../services/book';
 import { RouterLink } from '@angular/router';
+import {DecimalPipe} from '@angular/common';
 
 @Component({
   imports: [
     BookListItem,
-    RouterLink
+    RouterLink,
+    DecimalPipe
   ],
   selector: 'app-book-list',
   styleUrl: './book-list.css',

@@ -30,7 +30,7 @@
     <p>{{book.name}}</p>
   }
 
-  <p>{{ booksWithDescriptionCount()}} books have descriptions.</p>
+  <p>{{ booksWithDescriptionCount() | number: '1.0-1' }} books have descriptions.</p>
 
   <p>{{ fantasyBookCount() }} Fantasy books.</p>
   <p>Data source: {{ apiBaseUrl }}</p>

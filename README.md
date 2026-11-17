@@ -73,3 +73,38 @@ I chose HttpClient, because my API returns book inside a docs array, I need to e
 It also uses RxJS operators like map() to process API data. I don't need to change my existed add, edit or delete methods as well.
 
 All adding, editing and deleting method change my local data only. Once page being refreshed, changes disappear since the books are imported from OpenLibrary API again. 
+
+
+## Lazy Loading
+The sizes of files are shown as followings:
+1. Before lazy loading
+   Initial chunk files | Names         |  Raw size | Estimated transfer size
+   main-PBCJTUQA.js    | main          | 321.26 kB |                85.34 kB
+   styles-5INURTSO.css | styles        |   0 bytes |                 0 bytes
+
+                    | Initial total | 321.26 kB |                85.34 kB
+
+Application bundle generation complete. [2.955 seconds] - 2026-11-17T12:15:16.814Z
+
+Output location: /Users/lsl/Documents/JS FrameWorks - Mathew/PenghuaLiuLearningAngularF26/dist/PenghuaLiuLearningAngularF26
+
+2. After lazy loading
+   Initial chunk files | Names         |  Raw size | Estimated transfer size
+   chunk-5UQ5A7XE.js   | -             | 164.79 kB |                48.74 kB
+   chunk-WXO4VGXI.js   | -             | 104.97 kB |                27.27 kB
+   main-NBFJUPTL.js    | main          |   8.44 kB |                 2.81 kB
+   styles-5INURTSO.css | styles        |   0 bytes |                 0 bytes
+
+                    | Initial total | 278.20 kB |                78.82 kB
+
+Lazy chunk files    | Names         |  Raw size | Estimated transfer size
+chunk-72FMSJXQ.js   | book-form     |  45.05 kB |                10.14 kB
+chunk-SRN252XW.js   | book-detail   | 979 bytes |               979 bytes
+
+Application bundle generation complete. [2.480 seconds] - 2026-11-17T12:39:48.240Z
+
+Output location: /Users/lsl/Documents/JS FrameWorks - Mathew/PenghuaLiuLearningAngularF26/dist/PenghuaLiuLearningAngularF26
+
+The changes show:
+1. Lazy chunk files  appears after setting the lazy loading
+2. The size of initial chunk files dropped from 321.26kB to 278.20 kB.

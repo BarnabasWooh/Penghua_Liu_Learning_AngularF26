@@ -1,15 +1,14 @@
 import { Routes } from '@angular/router';
-import {BookDetail} from './components/book-detail/book-detail';
 import {BookList} from './book-list/book-list';
-import {BookForm} from './book-form/book-form';
 import { editGuard } from './guards/edit-guard';
 
 export const routes: Routes = [
-
-  { path: 'books/:id', component: BookDetail },
+// Lazy loading with load components.
+  { path: 'books/:id', loadComponent: () => import('./components/book-detail/book-detail').then(m => m.BookDetail), },
   {
     path: 'books/edit/:id',
-    component: BookForm,
+    // Lazy load the edit form.
+    loadComponent: () => import('./book-form/book-form').then(m=>m.BookForm),
     canActivate: [editGuard]
   },
 // pathMatch: 'full' is required for an empty path. Every URL starts with an empty string,
@@ -17,5 +16,6 @@ export const routes: Routes = [
   { path: '', redirectTo: 'books', pathMatch: 'full'},
   { path: 'books', component: BookList },
 
-  { path: 'add', component: BookForm}
+// Lazy load the add form.
+  { path: 'add', loadComponent: () => import('./book-form/book-form').then(m=>m.BookForm)}
 ];

@@ -108,3 +108,9 @@ Output location: /Users/lsl/Documents/JS FrameWorks - Mathew/PenghuaLiuLearningA
 The changes show:
 1. Lazy chunk files  appears after setting the lazy loading
 2. The size of initial chunk files dropped from 321.26kB to 278.20 kB.
+
+
+## Lifecycle and Constructor to interrupt
+1. Constructor undefined.
+Before ngOnInit starts, constructor read the book id firstly and found not assigned yet. ID input is not set when the constructor runs.
+2. The action of "Back to book list page from detail page". The router executes destroy order once the action is taking.

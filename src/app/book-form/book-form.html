@@ -3,7 +3,7 @@
 <form class="book-form" [formGroup]="bookForm" (ngSubmit)="onSubmit()">
   <label>
     Name
-    <input type="text" formControlName="name" />
+    <input #firstField type="text" formControlName="name" />
   </label>
   @if (bookForm.controls.name.touched) {
     @if (bookForm.controls.name.hasError('required')) {

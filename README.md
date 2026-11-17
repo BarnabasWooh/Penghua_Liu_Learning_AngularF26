@@ -114,3 +114,6 @@ The changes show:
 1. Constructor undefined.
 Before ngOnInit starts, constructor read the book id firstly and found not assigned yet. ID input is not set when the constructor runs.
 2. The action of "Back to book list page from detail page". The router executes destroy order once the action is taking.
+
+## afterNextRender 
+ngOnInit implements initial input setting, but can't get the render done for sure, but afterNextRender will do surely.

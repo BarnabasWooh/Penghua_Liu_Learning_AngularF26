@@ -1,4 +1,4 @@
-import { Component, inject, input, effect, computed} from '@angular/core';
+import {Component, inject, input, effect, computed, viewChild, ElementRef, afterNextRender} from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators, AbstractControl, ValidationErrors } from "@angular/forms";
 import {BookService} from '../services/book';
 import { Router } from "@angular/router";
@@ -35,6 +35,7 @@ export class BookForm {
   private fb = inject(FormBuilder);
   private bookService = inject  (BookService);
   private router = inject (Router);
+  private firstField = viewChild<ElementRef<HTMLInputElement>>('firstField');
 
   // Add optional tag to add and remove rows.
   protected tags = this.fb.array([
@@ -116,5 +117,10 @@ export class BookForm {
         this.bookForm.patchValue(book);
       }
     });
+// Focus after rendering because the input must exist in the DOM
+    afterNextRender(() => {
+      this.firstField()?.nativeElement.focus();
+    });
+
   }
 }

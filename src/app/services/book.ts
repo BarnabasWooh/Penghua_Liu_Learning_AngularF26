@@ -1,4 +1,4 @@
-import { Injectable, signal, computed, inject } from '@angular/core';
+import { Injectable, signal, computed, inject, effect } from '@angular/core';
 import {Book, mapOpenLibraryBook, OpenLibraryResponse} from '../shared/model/book'
 import {book_Config} from '../shared/book-config';
 import {HttpClient} from '@angular/common/http';
@@ -10,15 +10,33 @@ export class BookService {
   private config = inject(book_Config);
   apiBaseUrl =this.config.apiBaseUrl;
 
-  // Delete the former books. Prepare empty array to receive from API
-private books = signal<Book[]>([]);
+// Store only books created by the user.
+  private storageKey = 'book-library.myBooks';
+  private localBooks = signal<Book[]>(this.loadLocalBooks());
+
+// Combine local books with API books in the existing list.
+  private books = signal<Book[]>([...this.localBooks()]);
 
 // track the loading and error states
 loading = signal(false);
 error = signal<string | null>(null);
 
-// Load books when the service starts
-constructor() {this.load();}
+  constructor() {
+    // Save user-created books whenever they change.
+    effect(() => {
+      try {
+        localStorage.setItem(
+          this.storageKey,
+          JSON.stringify(this.localBooks())
+        );
+      } catch {
+        // Continue working if browser storage is unavailable.
+      }
+    });
+
+    // Fetch API books normally.
+    this.load();
+  }
 
   //Request books from the API
   load(){
@@ -39,11 +57,11 @@ this.http.get<OpenLibraryResponse>(
     // Get the docs array and convert each item to Book.
     map(response => response.docs.map(mapOpenLibraryBook))
 ).subscribe({
-  // If successful, save books and stop loading.
   next: (list) => {
-    this.books.set(list);
+    // Combine fresh API data with user-created books.
+    this.books.set([...list, ...this.localBooks()]);
     this.loading.set(false);
-},
+  },
 
   // If the request fails, show an error and stop loading
   error: () => {
@@ -65,9 +83,13 @@ this.books().filter(book => book.description));
     this.books().filter(book => book.category === 'Fantasy').length
   );
 
-addBook(newBook: Book) {
-this.books.update(list => [...list, newBook]);
-}
+  addBook(newBook: Book) {
+    // Persist the user-created book.
+    this.localBooks.update(list => [...list, newBook]);
+
+    // Add the book to the displayed list.
+    this.books.update(list => [...list, newBook]);
+  }
 
   nextId(): number {
     const ids = this.books()
@@ -77,10 +99,20 @@ this.books.update(list => [...list, newBook]);
     return Math.max(0, ...ids) + 1;
   }
 
-removeBook(id: string | number){
-  this.books.update(list => list.filter(book => book.id !== id));
-}
+  removeBook(id: string | number) {
+    // Remove the book from both lists when applicable.
+    this.localBooks.update(list => list.filter(book => book.id !== id));
+    this.books.update(list => list.filter(book => book.id !== id));
+  }
   updateBook(updatedBook: Book) {
+    // Persist edits only when the book was created locally.
+    this.localBooks.update(list =>
+      list.map(book =>
+        book.id === updatedBook.id ? updatedBook : book
+      )
+    );
+
+    // Update the displayed book regardless of its source.
     this.books.update(list =>
       list.map(book =>
         book.id === updatedBook.id ? updatedBook : book
@@ -89,5 +121,27 @@ removeBook(id: string | number){
   }
   getBook(id: string): Book | undefined {
     return this.books().find(book => String(book.id) === id);
+  }
+
+  // Restore books created by the user.
+  private loadLocalBooks(): Book[] {
+    try {
+      const data: unknown = JSON.parse(
+        localStorage.getItem(this.storageKey) ?? '[]'
+      );
+
+      // Ignore invalid stored data.
+      return Array.isArray(data)
+        ? data.filter(book =>
+          book !== null &&
+          typeof book === 'object' &&
+          typeof book.name === 'string' &&
+          typeof book.id === 'number'
+        )
+        : [];
+    } catch {
+      // Continue with an empty list if storage cannot be read.
+      return [];
+    }
   }
 }

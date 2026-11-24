@@ -5,12 +5,6 @@
     <!-- Highlight each book card on hover. -->
     <div class="book-card" appHighlight>
 
-      <!-- Display the book information -->
-      <app-book-list-item
-        [item]="book"
-        (actionEmitter)="onChildAction($event)"
-        [isEven]="evenRow" />
-
     <!-- Pass a highlight color to the component's host directive. -->
     <app-book-list-item
       [item]="book"

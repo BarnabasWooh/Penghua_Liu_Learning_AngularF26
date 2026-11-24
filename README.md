@@ -117,3 +117,6 @@ Before ngOnInit starts, constructor read the book id firstly and found not assig
 
 ## afterNextRender 
 ngOnInit implements initial input setting, but can't get the render done for sure, but afterNextRender will do surely.
+
+## localStorage
+Save bookID, rember saved list after refreshing. Sequencies are also saved.

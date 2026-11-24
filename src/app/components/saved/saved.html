@@ -1,0 +1,24 @@
+<h2>Saved Books</h2>
+
+<!-- Choose how saved books are sorted. -->
+<label for="sortOrder">Sort books:</label>
+
+<select
+  id="sortOrder"
+  #sortSelect
+  [value]="sortOrder()"
+  (change)="sortOrder.set(sortSelect.value === 'desc' ? 'desc' : 'asc')">
+  <option value="asc">A–Z</option>
+  <option value="desc">Z–A</option>
+</select>
+@if (savedBooks().length > 0) {
+  @for (book of savedBooks(); track book.id) {
+    <div>
+      <a [routerLink]="['/books', book.id]">
+        {{ book.name }}
+      </a>
+    </div>
+  }
+} @else {
+  <p>No saved books yet.</p>
+}

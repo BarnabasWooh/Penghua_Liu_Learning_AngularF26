@@ -2,6 +2,12 @@ import { Routes } from '@angular/router';
 import {BookList} from './book-list/book-list';
 
 export const routes: Routes = [
+  {
+    path: 'saved',
+    // Lazy-load the Saved page.
+    loadComponent: () =>
+      import('./components/saved/saved').then(m => m.SavedPage),
+  },
 // Lazy loading with load components.
   { path: 'books/:id', loadComponent: () => import('./components/book-detail/book-detail').then(m => m.BookDetail), },
 

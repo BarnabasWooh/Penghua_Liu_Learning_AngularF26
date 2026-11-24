@@ -13,6 +13,8 @@
   <button type="button" (click)="guardService.toggleGuard()">
     {{ guardService.guardEnabled() ? 'Unlock Editing' : 'Lock Editing' }}
   </button>
+  <!-- Navigate to the saved books page. -->
+  <a routerLink="/saved">Saved</a>
 </nav>
 
 <router-outlet />

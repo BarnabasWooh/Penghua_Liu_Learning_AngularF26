@@ -1,5 +1,5 @@
 import { Component, signal, inject } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { RouterOutlet, RouterLink } from '@angular/router';
 import { EditGuard } from './services/edit-guard';
 import {LoadingService} from './services/loading';
 import {ErrorService} from './services/error';

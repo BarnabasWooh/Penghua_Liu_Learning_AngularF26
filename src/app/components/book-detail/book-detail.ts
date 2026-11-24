@@ -2,6 +2,7 @@ import {Component, inject, input, computed, OnInit, OnDestroy} from '@angular/co
 import {BookService} from '../../services/book';
 import {AuthorLabelPipe} from '../../pipes/author-label-pipe';
 import {Highlight} from '../../directives/highlight';
+import {Saved} from '../../services/saved';
 
 @Component({
   imports: [AuthorLabelPipe, Highlight],
@@ -11,6 +12,7 @@ import {Highlight} from '../../directives/highlight';
 })
 export class BookDetail implements OnInit, OnDestroy {
   private bookService = inject(BookService);
+  protected savedService = inject(Saved);
 
   id = input<string>();
 
@@ -39,4 +41,6 @@ export class BookDetail implements OnInit, OnDestroy {
   const seconds = Math.round((Date.now() - this.openedAt) / 1000);
   console.log(`[lifecycle] closed: ${this.bookName} after ${seconds} seconds`);
   }
+
+  protected readonly String = String;
 }

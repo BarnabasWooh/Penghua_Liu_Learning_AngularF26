@@ -1,9 +1,10 @@
 import {Component, inject, input, computed, OnInit, OnDestroy} from '@angular/core';
 import {BookService} from '../../services/book';
 import {AuthorLabelPipe} from '../../pipes/author-label-pipe';
+import {Highlight} from '../../directives/highlight';
 
 @Component({
-  imports: [AuthorLabelPipe],
+  imports: [AuthorLabelPipe, Highlight],
   selector: 'app-book-detail',
   styleUrl: './book-detail.scss',
   templateUrl: './book-detail.html',

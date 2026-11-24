@@ -2,8 +2,8 @@
   <p>Changes are saved on this device only.</p>
   <!-- Display each book inside its own card -->
   @for (book of bookList(); track book.id; let evenRow = $even) {
-
-    <div class="book-card">
+    <!-- Highlight each book card on hover. -->
+    <div class="book-card" appHighlight>
 
       <!-- Display the book information -->
       <app-book-list-item

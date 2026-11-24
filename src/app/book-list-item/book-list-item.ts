@@ -3,12 +3,14 @@ import {Book} from '../shared/model/book';
 import { BookEvent} from '../shared/model/book';
 import {SlicePipe, TitleCasePipe} from '@angular/common';
 import {TruncatePipe} from '../pipes/truncate-pipe';
+import { Highlight} from '../directives/highlight';
 
 @Component({
   imports: [
     TitleCasePipe,
     SlicePipe,
-    TruncatePipe
+    TruncatePipe,
+    Highlight
   ],
   selector: 'app-book-list-item',
   styleUrl: './book-list-item.css',

@@ -4,6 +4,7 @@ import { BookEvent} from '../shared/model/book';
 import {BookService} from '../services/book';
 import { RouterLink } from '@angular/router';
 import {DecimalPipe} from '@angular/common';
+import { Highlight } from '../directives/highlight';
 
 @Component({
   imports: [

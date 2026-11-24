@@ -5,12 +5,14 @@ import {BookService} from '../services/book';
 import { RouterLink } from '@angular/router';
 import {DecimalPipe} from '@angular/common';
 import { Highlight } from '../directives/highlight';
+import {Confirm} from '../directives/confirm';
 
 @Component({
   imports: [
     BookListItem,
     RouterLink,
-    DecimalPipe
+    DecimalPipe,
+    Confirm
   ],
   selector: 'app-book-list',
   styleUrl: './book-list.css',

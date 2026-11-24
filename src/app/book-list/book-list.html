@@ -15,7 +15,12 @@
       <div class="book-actions">
         <a [routerLink]="['/books', book.id]">View Details</a>
         <a [routerLink]="['/books/edit', book.id]">Edit</a>
-        <button type="button" (click)="deleteBook(book.id)">Delete</button>
+        <!-- Delete the book only after the confirmation -->
+        <button type="button"
+                appConfirm = "Are you sure you want to delete this book?"
+                (confirmed)="deleteBook(book.id)">
+          Delete
+        </button>
       </div>
 
     </div>

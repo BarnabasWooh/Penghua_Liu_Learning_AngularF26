@@ -13,6 +13,12 @@ import { Highlight} from '../directives/highlight';
     Highlight
   ],
   selector: 'app-book-list-item',
+  hostDirectives: [
+    {
+      directive: Highlight,
+      inputs: ['appHighlight: highlightColor'],
+    },
+  ],
   styleUrl: './book-list-item.css',
   templateUrl: './book-list-item.html',
 })

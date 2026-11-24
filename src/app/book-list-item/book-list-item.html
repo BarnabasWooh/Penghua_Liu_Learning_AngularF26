@@ -1,4 +1,4 @@
-<div class="card" appHighlight="#D8F3DC" (click) ="onCardClick()" [class.zebra]="isEven()">
+<div class="card" (click) ="onCardClick()" [class.zebra]="isEven()">
   <img class="book-cover" [src]="item().imageUrl" alt="Book cover">
   <h2>{{ item().name | titlecase | slice:0:30}}</h2>
   @switch (item().category) {

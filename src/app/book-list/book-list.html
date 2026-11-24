@@ -11,6 +11,13 @@
         (actionEmitter)="onChildAction($event)"
         [isEven]="evenRow" />
 
+    <!-- Pass a highlight color to the component's host directive. -->
+    <app-book-list-item
+      [item]="book"
+      (actionEmitter)="onChildAction($event)"
+      [isEven]="evenRow"
+      highlightColor="#D8F3DC" />
+
       <!-- Keep both action links together -->
       <div class="book-actions">
         <a [routerLink]="['/books', book.id]">View Details</a>
